@@ -38,7 +38,7 @@ public:
     }
     
     // 重载赋值符号.
-    Sp_counter &operator=(Sp_counter &spc)
+    Sp_counter& operator=(Sp_counter &spc)
     {
         cout << "父类重载 = " << endl;
         cout << "释放 counter内存 " << endl;
@@ -47,7 +47,7 @@ public:
         return *this;
     }
     
-    Sp_counter &GetCounter()
+    Sp_counter& GetCounter()
     {
         return *this;
     }
@@ -85,7 +85,7 @@ public:
     smart_pointer(T* ptr = NULL);
     ~smart_pointer();
     smart_pointer(smart_pointer<T> &);
-    smart_pointer<T> &operator=(smart_pointer<T> &);
+    smart_pointer<T>& operator=(smart_pointer<T> &);
     T &operator*();
     T *operator->(void);
     size_t use_count();
@@ -181,8 +181,61 @@ inline T *smart_pointer<T>::operator->(void) {
     return this->_ptr;
 }
 
+
+class Body
+{
+public:
+    string name;
+    Body() {
+        cout<< "Body 无参构造" << endl;
+    }
+    
+    Body(Body& sp) {
+        cout<< "来源: " << sp.name << endl;
+        cout<< "Body 拷贝构造" << endl;
+    }
+    
+    ~Body() {
+        
+        cout<< "Body 析构 name:" << name << endl;
+    }
+};
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    /** normal construction
+    Body a;
+    Body b;
+
+    a.name = "a";
+    b.name = "b";
+
+    b = a;
+    printf("%p", &a);
+    printf("%p", &b);
+     */
+//    Body *b1 = new Body();
+//    b1->name = "b1";
+//
+//    Body *b2 = new Body();
+//    b2->name = "b2";
+    
+
+
+    int *a = new int(10);
+    int *b = new int(20);
+    cout << "-----------默认构造测试-------------" << endl;
+    smart_pointer<int> sp(a);
+    cout << "sp.use_count:" << sp.use_count() << endl;
+    cout << "----------------------------------" << endl;
+    
+    {
+        cout << "-----------拷贝构造测试-------------" << endl;
+        smart_pointer<int> sp1(sp);
+        smart_pointer<int> sp2(sp1);
+        cout << "sp1.use_count:" << sp1.use_count() << endl;
+        cout << "sp2.use_count:" << sp2.use_count() << endl;
+    }
+    cout << "sp.use_count:" << sp.use_count() << endl;
+    
     return 0;
 }
