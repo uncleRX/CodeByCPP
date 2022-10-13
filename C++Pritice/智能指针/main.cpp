@@ -52,6 +52,7 @@ public:
 
     Node(int va) : value(va)
     {
+        this->parentPtr.lock()
         cout << "Constructor" << endl;
     }
 
@@ -80,6 +81,8 @@ public:
     {
         cout << "A: 析构函数" << endl;
     }
+    
+
 };
 
 
@@ -91,7 +94,12 @@ unique_ptr<string> temUnique(const char* s)
 }
 
 int main(int argc, const char * argv[]) {
-
+    {
+        A *aaa = new A();
+        shared_ptr<A> aref(aaa);
+        auto n = aref;
+//        shared_ptr<A> aref1(aaa);
+    }
 
     // 防止内存泄漏的智能指针,它独享被管理对象的所有权
     unique_ptr<string> p1(new string("我是p1的值"));

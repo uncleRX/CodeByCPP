@@ -12,6 +12,8 @@ using namespace std;
 
 extern void m_array();
 
+
+
 void autoVariate() {
     auto f = 3.14;
     cout << typeid(f).name() << endl;
@@ -19,6 +21,11 @@ void autoVariate() {
 
 int main(int argc, const char * argv[]) {
     // insert code here...
+    
+    A a;
+    
+    
+
     
     autoVariate();
     

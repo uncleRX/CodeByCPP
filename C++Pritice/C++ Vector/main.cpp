@@ -105,6 +105,19 @@ int main(int argc, const char * argv[]) {
     test.emplace_back(1);//移动构造
     
     std::cout << "xxxxxxxxxx" << std::endl;
+    
+    
+    
+    
+    vector<testEmplace*> test1;
+    testEmplace* a = new testEmplace();
+    test1.emplace_back(a);
+    test1.emplace_back(a);
+    test1.emplace_back(a);
+    test1.emplace_back(a);
+    test1.emplace_back(a);
+    test1.emplace_back(a);
+
 
 //    testEmplace a;//构造
 //    test.push_back(a);//拷贝构造
@@ -123,6 +136,12 @@ int main(int argc, const char * argv[]) {
 //
 //    testEmplace d;//构造
 //    test.emplace_back(std::move(d));//移动构造
+    
+    
+    for (const auto &v : test)
+    {
+        test.pop_back();
+    }
     
     return 0;
 }

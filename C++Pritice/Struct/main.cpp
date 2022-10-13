@@ -8,6 +8,11 @@
 #include <iostream>
 using namespace std;
 
+
+
+
+
+
 struct Books
 {
     char title[50];
@@ -16,15 +21,30 @@ struct Books
     int book_id;
 };
 
+
+struct fb_info {
+    atomic_int count;
+    int node;  /*一个FrameBuffer设备的次设备号*/
+    int flags;
+    struct mutex lock;        /* Lock for open/release/ioctl funcs */
+    struct mutex mm_lock;
+    
+    struct Books m_book;
+    Books m_book1;
+};
+
+
 typedef struct Name
 {
     char *value;
 }Names;
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    
+    fb_info info;
+    info.m_book.book_id = 1;
+    info.m_book1.book_id = 1;
+
+
     Books book1;
     Books book2;
     
